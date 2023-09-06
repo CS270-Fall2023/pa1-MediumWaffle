@@ -36,9 +36,11 @@ int getTokens(char *s, char ***args){
     int argsCounter=0;
     char* token="";
 
-    for(int i=0; i<sizeof(s); ++i){
+    for(int i=0; i<strlen(s); ++i){
         if(s[i]!=' '){
             token+=s[i]; //append new letter to token(word)
+            //remind Ekaterina
+            //count size of token, allocate memory for size of string
         } else {
             args[argsCounter]=&token; //put the token(word) in the args array, each location at a time
             printf("%s/n", *args[argsCounter]);
