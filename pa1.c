@@ -47,6 +47,14 @@ int getTokens(char *s, char ***args){
                 (*args)[i]=malloc()
                 copy substring to this space
                 append /0 (null terminator) to the end of the string*/
+
+
+/**
+ * @todo CREATE 3 FILES
+*/
+
+
+
         } else {
             args[argsCounter]=&token; //put the token(word) in the args array, each location at a time
             printf("%s/n", *args[argsCounter]);
