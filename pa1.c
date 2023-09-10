@@ -5,21 +5,7 @@
  *        that will parse a string into tokens (or words), 
  *        similar to what the shell is required to do.
 */
-#include <stdio.h>
-
-int getTokens(char *s, char ***args);
-void printTokens(char ***args, int n);
-
-int main(){
-
-    char **arrayOfTokens, str[] = "ls -l file";
-    int numberOfTokens;
-    numberOfTokens = getTokens(str, &arrayOfTokens);
-    printTokens(&arrayOfTokens, numberOfTokens);
-
-    return 0;
-}
-
+#include "pa1.h"
 /**
  * @param s original string of tokens used to create array of tokens
  * @param args is the array of tokens after calculation
@@ -33,46 +19,27 @@ int main(){
 */
 int getTokens(char *s, char ***args){
     int numOfTokens=0;
-    int argsCounter=0;
-    char* token="";
+    char* start = &s[0];
+    char* end = &s[0];
 
+    //if theres nothing in the token return -1
+    if (end == '\0'){return -1;}
+    //if the beginning of the string is a space, loop until no space and move both pointers to first token.
     for(int i=0; i<strlen(s); ++i){
-        if(s[i]!=' '){
-            token+=s[i]; //append new letter to token(word)
-            //count size of token, allocate memory for size of string
-            //create pointer to start of token and end of token to calculate size of token
-            /*Ekaterinas solution
-                go through string
-                find each word
-                (*args)[i]=malloc()
-                copy substring to this space
-                append /0 (null terminator) to the end of the string*/
-
-
-/**
- * @todo CREATE 3 FILES
-*/
-
-
-
-        } else {
-            args[argsCounter]=&token; //put the token(word) in the args array, each location at a time
-            printf("%s/n", *args[argsCounter]);
-            ++argsCounter;
-        }
+        if(end == ' '){
+            ++i;
+            end=&s[i];
+            start=&s[i];
+        } else{i=strlen(s);}
     }
-
-
-/**
- * @todo create an exception case where when the null
- *       terminator has been reached the program appends 
- *       "(null)" to the end of the token list (args)
- * 
- *       this will be the else if statement,
- *       and we move the else statement lower
-*/
-
-    
+    //count size of token, allocate memory for size of string
+    //create pointer to start of token and end of token to calculate size of token
+    /*Ekaterinas solution
+        go through string
+        find each word
+        (*args)[i]=malloc()
+        copy substring to this space
+        append /0 (null terminator) to the end of the string*/
     return numOfTokens;
 }
 
