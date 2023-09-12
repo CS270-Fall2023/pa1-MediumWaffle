@@ -19,27 +19,35 @@
 */
 int getTokens(char *s, char ***args){
     int numOfTokens=0;
-    char* start = &s[0];
-    char* end = &s[0];
 
     //if theres nothing in the token return -1
-    if (end == '\0'){return -1;}
+    if (s[0] == '\0'){return -1;}
     //if the beginning of the string is a space, loop until no space and move both pointers to first token.
-    for(int i=0; i<strlen(s); ++i){
-        if(end == ' '){
+    int i=0; //so it can be used outside of the scope. 
+
+    //check if whitespace before any tokens, if so ++i to ignore them
+    for(i=i; i<strlen(s); ++i){
+        if(s[i] == ' '){
             ++i;
-            end=&s[i];
-            start=&s[i];
-        } else{i=strlen(s);}
+        }
     }
-    //count size of token, allocate memory for size of string
-    //create pointer to start of token and end of token to calculate size of token
-    /*Ekaterinas solution
-        go through string
-        find each word
-        (*args)[i]=malloc()
-        copy substring to this space
-        append /0 (null terminator) to the end of the string*/
+
+    //first token, read til end of word, count along the way, then read it into a char*
+    char* word=""; //tokens we build along the way
+    int k=0; //loop through args
+    for(i=i; i<(strlen(s)-1); ++i){
+        if(s[i]!=' ' || s[i]!='\0'){
+            strncat(word, &s[i], 1); //strncat appends a null terminating character so i dont have to
+        } else {
+            if(s[--i]!=' '){ //if the previous char wasnt a whitespace, then put the word in args
+                (*args)[k]=malloc(strlen(word)); //Put word in token array
+                strncpy((*args)[k], word, strlen(word));
+                ++k;
+                strcpy(word, ""); //clear word
+                ++numOfTokens;
+            }
+        }
+    }
     return numOfTokens;
 }
 
