@@ -39,7 +39,7 @@ int getTokens(char *s, char ***args){
         if(s[i]!=' ' || s[i]!='\0'){
             strncat(word, &s[i], 1); //strncat appends a null terminating character so i dont have to
         } else {
-            if(s[--i]!=' '){ //if the previous char wasnt a whitespace, then put the word in args
+            if(s[i-1]!=' '){ //if the previous char wasnt a whitespace, then put the word in args
                 (*args)[k]=malloc(strlen(word)); //Put word in token array
                 strncpy((*args)[k], word, strlen(word));
                 ++k;
@@ -48,6 +48,11 @@ int getTokens(char *s, char ***args){
             }
         }
     }
+    //Done with main loop, add null to the end of the array
+    char* nullptr='\0';
+    ++numOfTokens;
+    (*args)[k]=malloc(1); //Put word in token array
+    strncpy((*args)[k], nullptr, 1);
     return numOfTokens;
 }
 
@@ -60,6 +65,7 @@ int getTokens(char *s, char ***args){
  *        number of tokens in total. 
 */
 void printTokens(char*** args, int n){
+    if(n == -1){printf("Nothing Was Entered");}
     printf("Number of Tokens: %d", (n-1));
     for(int i=0; i<n; ++i){
         printf("Token %d: %s\n", i, *args[i]);
