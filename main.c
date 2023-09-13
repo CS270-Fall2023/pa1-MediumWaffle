@@ -9,8 +9,10 @@
 
 int main(){
 
-    char **arrayOfTokens, str[] = "ls -l file";
+    char **arrayOfTokens, *str;
+    str=malloc(257); //256 char +1 null terminating char
     int numberOfTokens;
+    str = getInput();
     numberOfTokens = getTokens(str, &arrayOfTokens);
     printTokens(&arrayOfTokens, numberOfTokens);
 
