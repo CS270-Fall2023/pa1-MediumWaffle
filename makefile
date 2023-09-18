@@ -1,4 +1,4 @@
-#makros
+#maCros
 C= gcc
 FLAGS= -Wall -c -g
 
@@ -8,10 +8,10 @@ clean:
 all: test
 
 test: main.o pa1.o pa1.h
-	$(C) main.o pa1.o -o test
+	$(C) main.o pa1.o -o $@
 
 main.o: main.c pa1.h
-	$(C) $(FLAGS) main.c
+	$(C) $(FLAGS) $<
 
 pa1.o: pa1.c pa1.h
-	$(C) $(FLAGS) pa1.c
+	$(C) $(FLAGS) $<
