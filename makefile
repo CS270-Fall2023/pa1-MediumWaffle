@@ -1,13 +1,17 @@
+#makros
+C= gcc
+FLAGS= -Wall -c -g
+
 clean:
 	rm -r *.o test
 
 all: test
 
 test: main.o pa1.o pa1.h
-	gcc main.o pa1.o -o test
+	$(C) main.o pa1.o -o test
 
 main.o: main.c pa1.h
-	gcc -Wall -c -g main.c
+	$(C) $(FLAGS) main.c
 
 pa1.o: pa1.c pa1.h
-	gcc -Wall -c -g pa1.c
+	$(C) $(FLAGS) pa1.c
